@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6398585269760153470}
   - component: {fileID: 5113275136593426421}
   - component: {fileID: 122125623824512500}
+  - component: {fileID: 1928517958871665998}
   m_Layer: 0
   m_Name: BodyGrowth
   m_TagString: Untagged
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7500551, y: 0.88335896}
   m_EdgeRadius: 0
+--- !u!114 &1928517958871665998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338607567518513286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8260645df6c4d4da82bf02be157b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

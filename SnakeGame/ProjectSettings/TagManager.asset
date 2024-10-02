@@ -5,14 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Food
+  - Collidable
+  - Members
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
-  - 
+  - Spawn
   - 
   - 
   - 

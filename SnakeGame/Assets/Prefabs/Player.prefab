@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6863896404382287118}
   - component: {fileID: 1809055905447909478}
   - component: {fileID: 843673770573353310}
+  - component: {fileID: 1214179199571860596}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -114,7 +115,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4304745332459725764
 MonoBehaviour:
@@ -223,12 +224,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  speed: 10
-  moveTime: 0
-  cellSize: 0.2
+  playerLoadingPosition: {fileID: 11400000, guid: 01af6c8d05804a14e9995a6ef9fd8cd6, type: 2}
+  repulsionTimer: 0.1
+  repulsionForce: 482
+  speed: 7
   foodCounter: {fileID: 11400000, guid: 7146f46bec9baf2448b36d3e15ba4402, type: 2}
-  bodyPrefab: {fileID: 6398585269760153470, guid: 05ba3a6d43b26bd47a9c911087d769f3, type: 3}
+  bodyPrefab: {fileID: 338607567518513286, guid: 05ba3a6d43b26bd47a9c911087d769f3, type: 3}
   padding: 0.1
+  canChangeDirection: 1
+  party: {fileID: 11400000, guid: 497a21a690d9afd4694dd284b4445e71, type: 2}
+  bodyList: []
+  distanceBetween: 0.14
+  projectilePrefab: {fileID: 2610064070681462290, guid: d8fcda9c0a347e2428497d501af60aeb, type: 3}
+  attackCooldown: 0.5
   isSnakeMode: {fileID: 11400000, guid: e136b44620c66794bbb3cf218dd739e2, type: 2}
 --- !u!95 &1809055905447909478
 Animator:
@@ -296,3 +304,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7524671, y: 0.9845292}
   m_EdgeRadius: 0
+--- !u!114 &1214179199571860596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049889328426650911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8260645df6c4d4da82bf02be157b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -8,12 +8,15 @@ public class LevelEnteringScript : MonoBehaviour
     public int sceneIndex;
     public StateControl isSnakeMode;
     public ItemCounter foodCounter;
+    public Vector2 enteringPosition;
+    public VectorValue playerLoadingPosition;
     //public Vector2 positionToAppear;
     // Start is called before the first frame update
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger) 
-        { 
+        {
+            playerLoadingPosition.initialValue = enteringPosition;
             isSnakeMode.isInState = true;
             foodCounter.counter = 0;
             SceneManager.LoadScene(sceneIndex);

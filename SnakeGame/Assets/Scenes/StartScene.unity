@@ -709,7 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1ed46e5df94f64f80a8ae69b25e192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 1
+  sceneIndex: 4
+  respawningPosition: {x: 0, y: 0}
+  playerLoadingPosition: {fileID: 11400000, guid: 01af6c8d05804a14e9995a6ef9fd8cd6, type: 2}
+  party: {fileID: 11400000, guid: 497a21a690d9afd4694dd284b4445e71, type: 2}
+  isSnakeMode: {fileID: 11400000, guid: e136b44620c66794bbb3cf218dd739e2, type: 2}
 --- !u!1 &1409878659
 GameObject:
   m_ObjectHideFlags: 0
