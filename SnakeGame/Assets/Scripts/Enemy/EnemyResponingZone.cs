@@ -32,15 +32,8 @@ public class EnemyRespawningZone : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void FixedUpdate()
-    {
-        counter+=Time.deltaTime;
-        if (counter > waitUntilSpawning) 
-        {
-            
-        }
-    }
-    */
+    
+    
     private Vector2 GetRandomLocation()
     {
         float randomX = Random.Range(minBounds.x, maxBounds.x);

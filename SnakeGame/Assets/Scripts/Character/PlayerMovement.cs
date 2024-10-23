@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     float countUp = 0;
 
+    AudioManager audioManager;
     //mode switching variables
     public StateControl isSnakeMode;
     private bool snakeMode = false;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         snakeMode = isSnakeMode.isInState;
         //body.Add(gameObject);
+        
         transform.position = playerLoadingPosition.initialValue;
         /* for (int i = 0; i < foodCounter.counter; i++)
          {
@@ -65,7 +67,10 @@ public class PlayerMovement : MonoBehaviour
         attackTimer = attackCooldown;
 
     }
-
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
     // Update is called once per frame
     /*void Update()
     {
@@ -111,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     }*/
     public void Move(InputAction.CallbackContext context)
     {
-        if (!snakeMode)
+        /*if (!snakeMode)
         {
             animator.SetBool("isWalking", true);
         }
@@ -121,13 +126,13 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("LastInputX", moveInput.x);
             animator.SetFloat("LastInputY", moveInput.y);
 
-        }
+        }*/
 
         moveInput = context.ReadValue<Vector2>();
 
 
-        animator.SetFloat("InputX", moveInput.x);
-        animator.SetFloat("InputY", moveInput.y);
+       /* animator.SetFloat("InputX", moveInput.x);
+        animator.SetFloat("InputY", moveInput.y);*/
     }
 
     private void MoveFreely()
@@ -212,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Collidable") && snakeMode)
+        if (collision.gameObject.CompareTag("Collidable") || collision.gameObject.CompareTag("Wall") && snakeMode)
         {
             Vector2 collisionNormal = collision.contacts[0].normal;
             StartCoroutine(RepulsionUponHitting(repulsionTimer, collisionNormal));
@@ -321,6 +326,7 @@ public class PlayerMovement : MonoBehaviour
     private void ShootProjectile(GameObject target)
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        audioManager.PlaySFX(audioManager.firingProjectile);
         projectile.GetComponent<Projectile>().SetTarget(target);
     }
 }

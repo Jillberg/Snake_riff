@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f9cee89b615bc64d843d0f7e3ccf58f, type: 3}
   m_Name: inSnakeMode
   m_EditorClassIdentifier: 
-  isInState: 0
+  isInState: 1

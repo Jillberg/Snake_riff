@@ -25,6 +25,27 @@ public class MenuController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             menuCanvas.SetActive(!menuCanvas.activeSelf);
+            if (menuCanvas.activeSelf)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+            
         }
+    }
+
+    public void EnableMenu()
+    {
+        menuCanvas.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void DisableMenu() 
+    {
+        menuCanvas.SetActive(false);
+        Time.timeScale = 1;
     }
 }

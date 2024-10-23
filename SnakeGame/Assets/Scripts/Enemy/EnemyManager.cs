@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class EnemyManager : MonoBehaviour
     private int totalBatches;
     public TextMeshProUGUI batchesInfo;
     public GameObject portal;
+    public GameObject warningPrefab;
+    AudioManager audioManager;
 
 
 
@@ -41,12 +44,17 @@ public class EnemyManager : MonoBehaviour
         totalBatches=endingBatches-startingBatches+1;
         batchesInfo.text += batchCounter.ToString()+ " / " + totalBatches.ToString();
     }
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
     void Update()
     {
         totalEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (startingBatches > endingBatches && totalEnemyCount == 0)
         {
-            portal.SetActive(true);
+            StartCoroutine(ActivatePortal());
         }
         else if (totalEnemyCount == 0 && startingBatches <= endingBatches)
         {
@@ -56,7 +64,8 @@ public class EnemyManager : MonoBehaviour
             {
                 for (int i = 0; i < startingBatches; i++)
                 {
-                    SpawnEnemyZone();
+                    StartCoroutine(WarningAndSpawn());
+                    //SpawnEnemyZone();
                 }
                 timeWaitUntilNextBatch = interval;
                 startingBatches++;
@@ -73,8 +82,46 @@ public class EnemyManager : MonoBehaviour
        
     }
 
-    
+    private IEnumerator WarningAndSpawn()
+    {
+       
+            Vector2 spawnLocation = GetValidZoneLocation();
+            
+            // Instantiate the warning sign at the enemy spawn location
+            GameObject warning = Instantiate(warningPrefab, spawnLocation, Quaternion.identity);
+        audioManager.PlaySFX(audioManager.summoningGlyph);
+            // Wait for the countdown
+            yield return new WaitForSeconds(1);
+            timeWaitUntilNextBatch = interval;
+             yield return new WaitForSeconds(1);
 
+        // Destroy the warning sign
+        Destroy(warning);
+
+        // Spawn the enemy at the location
+            SpawnEnemyZone(spawnLocation);
+             timeWaitUntilNextBatch = interval;
+
+
+        // Optionally destroy the spawner object after enemies spawn
+
+    }
+
+    private IEnumerator ActivatePortal()
+    {
+        yield return new WaitForSeconds(3);
+        yield return new WaitUntil(() => totalEnemyCount == 0);
+        portal.SetActive(true);
+    }
+
+    public void SummoningEnemy(int batches)
+    {
+        for (int i = 0; i < batches; i++)
+        {
+            StartCoroutine(WarningAndSpawn());
+
+        }
+    }
     private Vector2 GetRandomZoneLocation()
     {
         float randomX = Random.Range(minBounds.x, maxBounds.x);
@@ -130,6 +177,11 @@ public class EnemyManager : MonoBehaviour
         
         Vector2 spawnLocation= GetValidZoneLocation();
         GameObject spawnedZone= Instantiate(enemyRespawningZone,spawnLocation,Quaternion.identity);
+    }
+
+    private void SpawnEnemyZone(Vector2 spawnLocation)
+    {
+        GameObject spawnedZone = Instantiate(enemyRespawningZone, spawnLocation, Quaternion.identity);
     }
 
 }

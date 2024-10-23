@@ -8,6 +8,10 @@ TagManager:
   - Collidable
   - Members
   - Enemy
+  - EnemyManager
+  - Wall
+  - ScreenShake
+  - AudioManager
   layers:
   - Default
   - TransparentFX
